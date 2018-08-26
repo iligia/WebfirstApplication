@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using WebfirstApplication.Models;
 
-namespace WebfirstApplication
+namespace MvcMovies
 {
     public class Startup
     {
@@ -22,6 +24,9 @@ namespace WebfirstApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<WebfirstApplicationContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WebfirstApplicationContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
